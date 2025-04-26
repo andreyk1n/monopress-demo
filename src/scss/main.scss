@@ -68,6 +68,7 @@ body {
     flex-direction: column;
     width: 100%;
     justify-content: center;
+    align-items: center;
 }
 
 .no-scroll {
@@ -79,7 +80,10 @@ body {
     max-width: $maxWidthContainer;
     width: 100%;
     margin: 0 auto;
-    padding: 0 15px
+    padding: 0 15px;
+    @media (max-width: 1200px) {
+        max-width: 95%;
+    }
 }
 
 // Застосування стилів для посилання: колір, час анімації, активний стан.

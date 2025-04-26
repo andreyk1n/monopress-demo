@@ -6,11 +6,50 @@
     position: fixed;
     top: 0;
     left: 0;
-    transition: top $transitionDuration;
+    background-color: #fff;
+    transition-duration: $transitionDuration;
+    padding: 15px 0;
+
+    &::after {
+        content: '';
+        width: $maxWidthContainer;
+        height: 2px;
+        background-color: $fontColor;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: block;
+        transition-duration: $transitionDuration;
+        z-index: -1;
+
+        @media (max-width: 1200px) {
+            width: 90%;
+        }
+    }
+
+    &--scrolled {
+        &::after {
+            width: 100%;
+        }
+    }
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo {
+        z-index: 1;
+        img {
+            width: 170px;
+        }
+    }
 
     &__nav {
         width: 100%;
-        max-width: 715px;
+        max-width: 400px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -18,20 +57,27 @@
 
         @media (max-width: 768px) {
             position: absolute;
-            right: -100%; 
+            right: -100%;
             top: 0;
             flex-direction: column;
             gap: 25px;
             align-items: center;
             justify-content: center;
             width: 100%;
-            min-height: 100vh; 
+            min-height: 100vh;
+            font-size: 25px;
             background-color: #ffffff;
             transition-duration: $transitionDuration;
         }
-    
+
         &.active {
-            right: 0; // Коли активне, меню буде видно
+            right: 0; 
+        }
+
+        a {
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 
@@ -50,7 +96,7 @@
             cursor: pointer;
             position: relative;
             z-index: 11;
-        
+
             span {
                 display: block;
                 width: 100%;
@@ -58,7 +104,7 @@
                 background-color: $buttonBgColor;
                 position: relative;
                 transition-duration: $transitionDuration;
-        
+
                 &::before,
                 &::after {
                     content: "";
@@ -68,27 +114,27 @@
                     background-color: $buttonBgColor;
                     transition-duration: $transitionDuration;
                 }
-        
+
                 &::before {
-                    top: -10px; 
+                    top: -10px;
                 }
-        
+
                 &::after {
-                    top: 10px; 
+                    top: 10px;
                 }
             }
-    
+
             &.active span {
-                background-color: transparent; 
-        
+                background-color: transparent;
+
                 &::before {
                     top: 0;
-                    transform: rotate(45deg); 
+                    transform: rotate(45deg);
                 }
-        
+
                 &::after {
                     top: 0;
-                    transform: rotate(-45deg); 
+                    transform: rotate(-45deg);
                 }
             }
         }
