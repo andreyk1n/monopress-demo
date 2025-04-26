@@ -81,6 +81,9 @@ body {
     width: 100%;
     margin: 0 auto;
     padding: 0 15px;
+    @media (max-width: 1200px) {
+        max-width: 94%;
+    }
 }
 
 // Застосування стилів для посилання: колір, час анімації, активний стан.
