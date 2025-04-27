@@ -7,6 +7,10 @@
     background-color: #f9fafb;
     border-radius: 30px;
 
+    @media (max-width: 768px) {
+        padding: 60px 0;
+    }
+
     &__container {
         max-width: 1200px;
         margin: 0 auto;

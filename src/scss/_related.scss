@@ -4,6 +4,10 @@
 .related {
   padding: 150px 0 100px 0;
 
+  @media (max-width: 768px) {
+    padding: 60px 0;
+  }
+
   &__container {
     max-width: 1200px;
     margin: 0 auto;
@@ -22,7 +26,7 @@
   }
 
   &__image-wrapper {
-    display: block; // щоб <a> поводився як блок
+    display: block;
     width: 100%;
     height: auto;
     overflow: hidden;
@@ -94,8 +98,8 @@
 
   &__item-image {
     display: block;
-    flex: 0 0 60px;
-    height: 60px;
+    flex: 0 0 100px;
+    height: 100px;
     overflow: hidden;
     border-radius: 8px;
     background-color: #f3f4f6;
