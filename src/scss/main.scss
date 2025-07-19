@@ -5,6 +5,7 @@
 @use 'components/related';
 @use 'components/results';
 @use 'partials/footer';
+@use 'partials/single';
 
 
 // ==============================================================================================
@@ -175,4 +176,20 @@ input {
 
 :-webkit-autofill::first-line {
     font-size: 16px;
+}
+
+.breadcrumbs {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+
+    a {
+        transition-duration: .5s;
+
+        &:hover {
+            opacity: .5;
+        }
+    }
 }
