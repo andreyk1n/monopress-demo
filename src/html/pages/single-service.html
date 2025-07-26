@@ -1,0 +1,23 @@
+@@include('partials/head.html')
+
+
+<div class="wrapper">
+  @@include('partials/header.html')
+
+  @@include('components/hero.html', {
+  "title": "Назва послуги",
+  "subtitle": "Опис послуги, що надається компанією. Тут можна вказати деталі, переваги та особливості.",
+  "button": "<a href=\"#form\" class=\"hero__button\">Замовити дзвінок</a>"
+  })
+
+  @@include('components/service-details.html')
+
+  @@include('partials/form.html')
+
+  <!-- Якщо потрібна модалка - розкоментуйте -->
+  @@include('partials/modal.html')
+  <!-- Якщо потрібна модалка - розкоментуйте -->
+</div>
+</div>
+
+@@include('partials/footer.html')

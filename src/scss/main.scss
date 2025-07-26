@@ -8,6 +8,8 @@
 @use 'components/privacy';
 @use 'components/about';
 @use 'components/services';
+@use 'components/service-details';
+@use 'partials/form';
 @use 'partials/footer';
 @use 'partials/single';
 
@@ -198,3 +200,4 @@ input {
         }
     }
 }
+
