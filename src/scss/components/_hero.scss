@@ -11,7 +11,7 @@
     border-radius: 30px;
 
     @media (max-width: 768px) {
-        padding: 60px 0;
+        padding: 20px 0;
     }
 
     &__container {
@@ -22,6 +22,16 @@
         justify-content: space-between;
         gap: 40px;
         flex-wrap: wrap;
+        padding: 0 30px;
+
+        @media (max-width: 1200px) {
+            padding: 0 15px;
+        }
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            text-align: center;
+        }
     }
 
     .hero__container {
@@ -37,7 +47,7 @@
     }
 
     &__title {
-        font-size: clamp(38px, 5vw, 48px);
+        font-size: clamp(32px, 5vw, 48px);
         font-weight: 700;
         color: #111827;
         margin-bottom: 24px;

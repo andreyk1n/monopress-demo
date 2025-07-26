@@ -30,6 +30,7 @@
 
     &--scrolled {
         padding: 15px 0;
+
         &::after {
             width: 100%;
         }
@@ -43,6 +44,7 @@
 
     &__logo {
         z-index: 1;
+
         img {
             width: 170px;
         }
@@ -64,19 +66,22 @@
             position: absolute;
             right: -100%;
             top: 0;
+            display: flex;
             flex-direction: column;
             gap: 25px;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; 
             width: 100%;
-            min-height: 100vh;
+            height: 100vh; 
+            overflow-y: auto; 
             font-size: 25px;
-            background-color: #ffffff;
-            transition-duration: $transitionDuration;
+            background-color: #fff;
+            transition-duration: 0.5s;
+            padding: 120px 20px 30px 20px;
         }
 
         &.active {
-            right: 0; 
+            right: 0;
         }
 
         a {

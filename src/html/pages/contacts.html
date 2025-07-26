@@ -1,0 +1,21 @@
+@@include('partials/head.html')
+
+
+<div class="wrapper">
+    @@include('partials/header.html')
+
+    @@include('components/hero.html', {
+    "title": "Зв'яжіться з нами",
+    "subtitle": "Ми завжди відкриті до співпраці, запитань і нових можливостей.",
+    "button": ""
+    })
+
+    @@include('components/contacts.html')
+
+    <!-- Якщо потрібна модалка - розкоментуйте -->
+    @@include('partials/modal.html')
+    <!-- Якщо потрібна модалка - розкоментуйте -->
+</div>
+</div>
+
+@@include('partials/footer.html')
