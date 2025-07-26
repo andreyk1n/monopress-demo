@@ -1,2 +1,1 @@
-Starter theme by Andreyk1n v.1.5
- 
+Wordpress demo theme example
