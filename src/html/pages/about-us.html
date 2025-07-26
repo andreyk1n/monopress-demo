@@ -1,0 +1,21 @@
+@@include('partials/head.html')
+
+
+<div class="wrapper">
+    @@include('partials/header.html')
+
+    @@include('components/hero.html', {
+    "title": "Ми — команда, що створює майбутнє бізнесу",
+    "subtitle": "Об'єднуємо досвід, технології та пристрасть, щоб допомагати підприємцям зростати та досягати нових вершин.",
+    "button": ""
+    })
+
+    @@include('components/about.html')
+
+    <!-- Якщо потрібна модалка - розкоментуйте -->
+    @@include('partials/modal.html')
+    <!-- Якщо потрібна модалка - розкоментуйте -->
+</div>
+</div>
+
+@@include('partials/footer.html')
