@@ -12,6 +12,7 @@ const path = require('path'); // Робота з шляхами (вбудова�
 const through2 = require('through2'); // Обробка потоків (для sitemap)
 const copy = require('gulp-copy'); // Для копіювання файлів
 
+
 // Очищення директорії dist перед збіркою
 // del — ES-модуль, тому імпортуємо динамічно
 async function clean() {
@@ -22,7 +23,7 @@ async function clean() {
 // Шляхи до вхідних/вихідних файлів
 const paths = {
   html: {
-    src: 'src/html/pages/*.html', // HTML-сторінки
+    src: 'src/html/pages/**/*.html', // HTML-сторінки
     watch: 'src/html/**/*.html',  // Всі HTML-файли для відслідковування змін
     dest: 'dist/' // Куди зберігати HTML
   },
@@ -39,6 +40,10 @@ const paths = {
   images: {
     src: 'src/images/**/*.*', // Всі зображення
     dest: 'dist/images/' // Куди копіювати зображення
+  },
+  fonts: {
+    src: 'src/fonts/**/*.*',  // Всі шрифти
+    dest: 'dist/fonts/'       // Куди копіювати
   }
 };
 
@@ -52,7 +57,7 @@ function replaceAliases() {
       content = content.replace(/@img\//g, './images/');
 
       // Заміна @bgimg/filename.jpg → background-image: url('images/filename.jpg');
-      content = content.replace(/@bgimg\/([^)'" ]+)/g, "background-image: url('images/$1')");
+      content = content.replace(/@bgimg\/([^)'" ]+)/g, "background-image: url('./images/$1')");
 
       file.contents = Buffer.from(content);
     }
@@ -147,6 +152,76 @@ function images() {
     .on('end', () => console.log('Зображення успішно скопійовано!'));
 }
 
+// Копіювання шрифтів у dist
+function fonts() {
+  const fontsPath = paths.fonts.src.replace('/**/*.*', '');
+  if (!fs.existsSync(fontsPath)) {
+    console.warn('\x1b[33m%s\x1b[0m', `⚠️ Папка шрифтів не знайдена: ${fontsPath}`);
+    return Promise.resolve(); // Продовжити без помилки
+  }
+
+  console.log('\x1b[36m%s\x1b[0m', '🔤 Шрифти копіюються...');
+  return gulp.src(paths.fonts.src)
+    .pipe(copy(paths.fonts.dest, { prefix: 2 }))
+    .pipe(browserSync.stream())
+    .on('end', () => console.log('Шрифти успішно скопійовано!'));
+}
+
+function getArchiveName(baseName) {
+  const archiveDir = 'archives';
+  const date = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  let archiveName = `${baseName}-${date}.zip`;
+  let counter = 1;
+
+  while (fs.existsSync(path.join(archiveDir, archiveName))) {
+    archiveName = `${baseName}-${date}-${counter}.zip`;
+    counter++;
+  }
+
+  return archiveName;
+}
+
+// Архівація папки dist
+async function zipDist() {
+  const zip = (await import('gulp-zip')).default;
+  const archiveDir = 'archives';
+  const archiveName = getArchiveName('dist');
+
+  if (!fs.existsSync(archiveDir)) {
+    fs.mkdirSync(archiveDir);
+    console.log('\x1b[36m%s\x1b[0m', '📁 Створено папку archives');
+  }
+
+  console.log('\x1b[45m%s\x1b[0m', `📦 Архівація dist → ${archiveDir}/${archiveName}`);
+  return gulp.src('dist/**/*', { base: 'dist' })
+    .pipe(zip(archiveName))
+    .pipe(gulp.dest(archiveDir));
+}
+
+// Архівація всього проєкту
+async function zipProject() {
+  const zip = (await import('gulp-zip')).default;
+  const archiveDir = 'archives';
+  const archiveName = getArchiveName('project');
+
+  if (!fs.existsSync(archiveDir)) {
+    fs.mkdirSync(archiveDir);
+    console.log('\x1b[36m%s\x1b[0m', '📁 Створено папку archives');
+  }
+
+  console.log('\x1b[45m%s\x1b[0m', `📦 Архівація проєкту → ${archiveDir}/${archiveName}`);
+  return gulp.src([
+    '**/*',
+    '!node_modules/**',
+    '!.git/**',
+    '!archives/**',
+    '!.DS_Store',
+    '!*.log'
+  ], { dot: true })
+    .pipe(zip(archiveName))
+    .pipe(gulp.dest(archiveDir));
+}
+
 // Відслідковування змін і live-reload у браузері
 function watch() {
   browserSync.init({
@@ -168,7 +243,11 @@ function watch() {
 // Основне завдання за замовчуванням: очищення → паралельна обробка → sitemap → спостереження
 exports.default = gulp.series(
   clean,
-  gulp.parallel(html, styles, jsApp, jsFunctions, images),
+  gulp.parallel(html, styles, jsApp, jsFunctions, images, fonts),
   sitemap,
   watch
 );
+
+// Окремі команди
+exports.zipDist = zipDist;       // gulp zipDist — архівує dist
+exports.zipProject = zipProject; // gulp zipProject — архівує весь проєкт

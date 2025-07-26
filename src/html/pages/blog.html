@@ -1,0 +1,21 @@
+@@include('partials/head.html')
+
+
+<div class="wrapper">
+    @@include('partials/header.html')
+
+    @@include('components/hero.html', {
+    "title": "Ідеї, що допомагають бізнесу зростати",
+    "subtitle": "Актуальні матеріали про фінансове планування, оптимізацію витрат та ефективні закупівлі.",
+    "button": ""
+    })
+
+    @@include('components/posts.html')
+
+    <!-- Якщо потрібна модалка - розкоментуйте -->
+    @@include('partials/modal.html')
+    <!-- Якщо потрібна модалка - розкоментуйте -->
+</div>
+</div>
+
+@@include('partials/footer.html')

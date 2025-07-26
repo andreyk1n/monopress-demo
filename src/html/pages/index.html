@@ -3,8 +3,12 @@
 
 <div class="wrapper">
   @@include('partials/header.html')
-  
-  @@include('components/hero.html')
+
+  @@include('components/hero.html', {
+  "title": "Розвивайте бізнес з легкістю",
+  "subtitle": "Інструменти для управління фінансами, закупівлями та витратами — усе в одному місці.",
+  "button": "<a href=\"#services\" class=\"hero__button\">Дізнатися більше</a>"
+  })
 
   @@include('components/related.html')
 
