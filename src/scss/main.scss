@@ -7,6 +7,7 @@
 @use 'components/posts';
 @use 'components/privacy';
 @use 'components/about';
+@use 'components/services';
 @use 'partials/footer';
 @use 'partials/single';
 
@@ -59,6 +60,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
